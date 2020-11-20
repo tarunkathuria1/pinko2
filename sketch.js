@@ -3,7 +3,7 @@ const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
 
-var groundobj1,score=0,particleobj;
+var groundobj1,score=0,particleobj,gameState="end",count=0;
 var plinkos=[];
 var particles=[];
 var divisionobj=[];
@@ -61,10 +61,14 @@ if(frameCount%60===0){
 for(var p=0;p<particles.length;p=p+1){
   particles[p].display();
 }
-if(particleobj!==null){
+if(particleobj!==undefined){
+  console.log(particleobj)
   particleobj.display();
+  console.log(particleobj.body.position.y)
 
   if(particleobj.body.position.y>760){
+    console.log(particleobj.body.position.x)
+    console.log(particleobj.body.position.y)
 
     if(particleobj.body.position.x<300){
       score=score+500;
@@ -72,6 +76,18 @@ if(particleobj!==null){
       if(count>=5)gameState="end";
     }
   }
+
 }
+  
   drawSprites();
 }
+function mousePressed() { 
+  console.log(gameState)
+  if(gameState!=="end"){
+  console.log(gameState)
+   count++;
+   console.log(count)
+     particleobj=new particle(mouseX, 10, 10);
+     console.log(particleobj)
+   }
+  }
